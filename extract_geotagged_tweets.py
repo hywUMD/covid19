@@ -95,7 +95,7 @@ if __name__ == "__main__":
 
         for logfile in current_date_path_in.iterdir():
             if logfile.is_file():
-                with open(logfile) as fin:
+                with open(logfile, encoding='ISO-8859-1') as fin:
                     try:
                         for line in fin:
                             try:
