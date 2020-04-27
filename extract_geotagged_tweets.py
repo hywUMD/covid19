@@ -41,12 +41,11 @@ def process_tweet(tweet):
     user = tweet.get('user', {})
     row.append(user.get('screen_name', ''))
     row.append(tweet.get('created_at', ''))
-    coordinates = tweet.get(
-        'coordinates', 
-        {'coordinates': ['', '']}
-    )['coordinates']
-    row.append(str(coordinates[1]))
-    row.append(str(coordinates[0]))
+    coordinates = tweet.get('coordinates')
+    if not coordinates:
+        coordinates = {'coordinates': ['', '']}
+    row.append(str(coordinates['coordinates'][1]))
+    row.append(str(coordinates['coordinates'][0]))
 
     place = tweet.get('place')
     if place:
