@@ -90,9 +90,8 @@ if __name__ == "__main__":
 
         tweet_id_set = set()
         current_date_path_in = Path(args.inputdir) / current_date_str
-        fout = Path(args.outputdir).joinpath(
-            current_date_str + ".txt"
-        ).open('w')
+        fout_path = Path(args.outputdir).joinpath(current_date_str + ".txt")
+        fout = fout_path.open('w')
         fout.write("\t".join(header) + "\n")
 
         for logfile in current_date_path_in.iterdir():
@@ -122,4 +121,4 @@ if __name__ == "__main__":
                         print("Malformat file")
                         # time.sleep(10)
         fout.close()
-        print("Finished...\t" + str(fout))
+        print("Finished...\t" + str(fout_path))
