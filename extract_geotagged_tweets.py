@@ -101,7 +101,7 @@ if __name__ == "__main__":
                             try:
                                 tweet = json.loads(line)
                             except json.decoder.JSONDecodeError:
-                                # print(line)
+                                print("Malformat tweet json...")
                                 # time.sleep(10)
                                 continue
                             if (
@@ -114,7 +114,7 @@ if __name__ == "__main__":
                                     fout.write_text("\t".join(row) + "\n")
                                     tweet_id_set.add(tweet.get('id_str'))
                     except UnicodeDecodeError:
-                        print(logfile)
-                        time.sleep(10)
+                        print("Malformat file")
+                        # time.sleep(10)
         
-        print("Finished..." + str(fout))
+        print("Finished...\t" + str(fout))
