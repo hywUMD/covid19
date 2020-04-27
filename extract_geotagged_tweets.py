@@ -100,8 +100,8 @@ if __name__ == "__main__":
                         try:
                             tweet = json.loads(line)
                         except json.decoder.JSONDecodeError:
-                            print(line)
-                            time.sleep(10)
+                            # print(line)
+                            # time.sleep(10)
                             continue
                         if (
                             tweet.get('id_str') not in tweet_id_set 
