@@ -38,7 +38,7 @@ def process_tweet(tweet):
 
     row.append(tweet.get('id_str', ''))
     row.append(tweet.get('text', ''))
-    user = row.get('user', {})
+    user = tweet.get('user', {})
     row.append(user.get('screen_name', ''))
     row.append(tweet.get('created_at', ''))
     coordinates = tweet.get(
