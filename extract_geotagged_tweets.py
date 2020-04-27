@@ -90,8 +90,10 @@ if __name__ == "__main__":
 
         tweet_id_set = set()
         current_date_path_in = Path(args.inputdir) / current_date_str
-        fout = Path(args.outputdir).joinpath(current_date_str + ".txt")
-        fout.write_text("\t".join(header) + "\n")
+        fout = Path(args.outputdir).joinpath(
+            current_date_str + ".txt"
+        ).open('w')
+        fout.write("\t".join(header) + "\n")
 
         for logfile in current_date_path_in.iterdir():
             if logfile.is_file():
@@ -101,7 +103,7 @@ if __name__ == "__main__":
                             try:
                                 tweet = json.loads(line)
                             except json.decoder.JSONDecodeError:
-                                print("Malformat tweet json...")
+                                # print("Malformat tweet json...")
                                 # time.sleep(10)
                                 continue
                             if (
@@ -112,12 +114,12 @@ if __name__ == "__main__":
                                 
                                 row = process_tweet(tweet)
                                 if len(row) == len(header):
-                                    fout.write_text("\t".join(row) + "\n")
-                                    print("Found a tweet in..." + str(logfile))
-                                    print("\t\t\t" + tweet.get('id_str'))
+                                    fout.write("\t".join(row) + "\n")
+                                    # print("Found a tweet in..." + str(logfile))
+                                    # print("\t\t\t" + tweet.get('id_str'))
                                     tweet_id_set.add(tweet.get('id_str'))
                     except UnicodeDecodeError:
                         print("Malformat file")
                         # time.sleep(10)
-        
+        fout.close()
         print("Finished...\t" + str(fout))
