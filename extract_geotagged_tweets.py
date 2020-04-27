@@ -96,21 +96,25 @@ if __name__ == "__main__":
         for logfile in current_date_path_in.iterdir():
             if logfile.is_file():
                 with open(logfile) as fin:
-                    for line in fin:
-                        try:
-                            tweet = json.loads(line)
-                        except json.decoder.JSONDecodeError:
-                            # print(line)
-                            # time.sleep(10)
-                            continue
-                        if (
-                            tweet.get('id_str') not in tweet_id_set 
-                            and 
-                            (tweet.get('coordinates') or tweet.get('place'))
-                        ):
-                            row = process_tweet(tweet)
-                            if len(row) == len(header):
-                                fout.write_text("\t".join(row) + "\n")
-                                tweet_id_set.add(tweet.get('id_str'))
+                    try:
+                        for line in fin:
+                            try:
+                                tweet = json.loads(line)
+                            except json.decoder.JSONDecodeError:
+                                # print(line)
+                                # time.sleep(10)
+                                continue
+                            if (
+                                tweet.get('id_str') not in tweet_id_set 
+                                and 
+                                (tweet.get('coordinates') or tweet.get('place'))
+                            ):
+                                row = process_tweet(tweet)
+                                if len(row) == len(header):
+                                    fout.write_text("\t".join(row) + "\n")
+                                    tweet_id_set.add(tweet.get('id_str'))
+                    except UnicodeDecodeError:
+                        print(logfile)
+                        time.sleep(10)
         
         print("Finished..." + str(fout))
