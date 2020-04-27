@@ -31,7 +31,7 @@ parser.add_argument(
 
 headers = "tweet_id	tweet	username	timestamp	latitude	longitude	place	boundingbox	following	followers	favourites_count	favorite_count	is_quote_status	quote_count	reply_count	retweeted	retweet_count	negativesum	racecat1	racecat2	racecat3	raceterm1	raceterm2	raceterm3	virusterm1	virusterm2	virusterm3"
 row_header = "\t".join(headers.split())
-print("header len: " + len(headers.split()))
+print("header len: " + str(len(headers.split())))
 
 def process_tweet(tweet):
     row = []
@@ -71,7 +71,7 @@ def process_tweet(tweet):
     row.append(str(tweet.get('retweeted', False)))
     row.append(str(tweet.get('retweet_count', 0)))
     row.extend(['' for x in range(10)])
-    print("row len: " + len(row))
+    print("row len: " + str(len(row)))
     "\t".join(row)
 
     return row
