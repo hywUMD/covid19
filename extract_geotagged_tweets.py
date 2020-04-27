@@ -2,6 +2,7 @@ from datetime import date, timedelta, datetime
 from pathlib import Path
 import json
 import os
+import time
 
 import argparse
 
@@ -96,7 +97,12 @@ if __name__ == "__main__":
             if logfile.is_file():
                 with open(logfile) as fin:
                     for line in fin:
-                        tweet = json.loads(line)
+                        try:
+                            tweet = json.loads(line)
+                        except json.decoder.JSONDecodeError:
+                            print(line)
+                            time.sleep(10)
+                            continue
                         if (
                             tweet.get('id_str') not in tweet_id_set 
                             and 
