@@ -71,9 +71,8 @@ def process_tweet(tweet):
     row.append(str(tweet.get('retweet_count', 0)))
     row.extend(['' for x in range(10)])
     print("row len: " + str(len(row)))
-    "\t".join(row)
-
-    return row
+    
+    return "\t".join(row)
 
 
 args = parser.parse_args()
