@@ -29,9 +29,9 @@ parser.add_argument(
     help="end date (not included)"
 )
 
-headers = "tweet_id	tweet	username	timestamp	latitude	longitude	place	boundingbox	following	followers	favourites_count	favorite_count	is_quote_status	quote_count	reply_count	retweeted	retweet_count	negativesum	racecat1	racecat2	racecat3	raceterm1	raceterm2	raceterm3	virusterm1	virusterm2	virusterm3"
-row_header = "\t".join(headers.split())
-print("header len: " + str(len(headers.split())))
+header = "tweet_id	tweet	username	timestamp	latitude	longitude	place	boundingbox	following	followers	favourites_count	favorite_count	is_quote_status	quote_count	reply_count	retweeted	retweet_count	negativesum	racecat1	racecat2	racecat3	raceterm1	raceterm2	raceterm3	virusterm1	virusterm2	virusterm3".split()
+# row_header = "\t".join(headers)
+# print("header len: " + str(len(headers.split())))
 
 def process_tweet(tweet):
     row = []
@@ -70,9 +70,8 @@ def process_tweet(tweet):
     row.append(str(tweet.get('retweeted', False)))
     row.append(str(tweet.get('retweet_count', 0)))
     row.extend(['' for x in range(10)])
-    print("row len: " + str(len(row)))
-    
-    return "\t".join(row)
+    # print("row len: " + str(len(row)))
+    return row
 
 
 args = parser.parse_args()
@@ -91,7 +90,7 @@ if __name__ == "__main__":
         tweet_id_set = set()
         current_date_path_in = Path(args.inputdir) / current_date_str
         fout = Path(args.outputdir).joinpath(current_date_str + ".txt")
-        fout.write_text(row_header + "\n")
+        fout.write_text("\t".join(header) + "\n")
 
         for logfile in current_date_path_in.iterdir():
             if logfile.is_file():
@@ -104,8 +103,8 @@ if __name__ == "__main__":
                             (tweet.get('coordinates') or tweet.get('place'))
                         ):
                             row = process_tweet(tweet)
-                            fout.write_text(row + "\n")
-
-                            tweet_id_set.add(tweet.get('id_str'))
+                            if len(row) == len(header):
+                                fout.write_text("\t".join(row) + "\n")
+                                tweet_id_set.add(tweet.get('id_str'))
         
         print("Finished..." + str(fout))
