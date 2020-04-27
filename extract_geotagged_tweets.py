@@ -53,7 +53,7 @@ def process_tweet(tweet):
         bounding_box = place.get(
             'bounding_box',
             {'coordinates': [['']]}
-        )['coordinates'][0]
+        )
         bounding_box_str = json.dumps(bounding_box['coordinates'][0])[1:-1]
         row.append(name)
         row.append(bounding_box_str)
