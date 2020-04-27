@@ -109,6 +109,7 @@ if __name__ == "__main__":
                                 and 
                                 (tweet.get('coordinates') or tweet.get('place'))
                             ):
+                                print("Found a tweet...")
                                 row = process_tweet(tweet)
                                 if len(row) == len(header):
                                     fout.write_text("\t".join(row) + "\n")
