@@ -30,7 +30,12 @@ parser.add_argument(
     help="end date (not included)"
 )
 
-header = "tweet_id	tweet	username	timestamp	latitude	longitude	place	boundingbox	following	followers	favourites_count	favorite_count	is_quote_status	quote_count	reply_count	retweeted	retweet_count	negativesum	racecat1	racecat2	racecat3	raceterm1	raceterm2	raceterm3	virusterm1	virusterm2	virusterm3".split()
+header = """tweet_id	tweet	username	timestamp	latitude	longitude	
+place	boundingbox	following	followers	favourites_count	favorite_count	
+is_quote_status	quote_count	reply_count	retweeted	retweet_count	negativesum	
+racecat1	racecat2	racecat3	raceterm1	raceterm2	raceterm3	
+virusterm1	virusterm2	virusterm3
+""".split()
 # row_header = "\t".join(headers)
 # print("header len: " + str(len(headers.split())))
 
@@ -120,7 +125,7 @@ if __name__ == "__main__":
                                             '\n', ' '
                                         ) + "\n"
                                     )
-                                    # print("Found a tweet in..." + str(logfile))
+                                    #print("Found a tweet in..." + str(logfile))
                                     # print("\t\t\t" + tweet.get('id_str'))
                                     tweet_id_set.add(tweet.get('id_str'))
                     except UnicodeDecodeError:
