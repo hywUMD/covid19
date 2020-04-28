@@ -99,6 +99,11 @@ if __name__ == "__main__":
         fout = fout_path.open('w')
         fout.write("\t".join(header) + "\n")
 
+        if not current_date_path_in.exists():
+            fout.close()
+            print("Finished...\t" + str(fout_path))
+            continue
+
         for logfile in current_date_path_in.iterdir():
             if logfile.is_file():
                 with open(logfile) as fin:
