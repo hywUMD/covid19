@@ -113,7 +113,13 @@ if __name__ == "__main__":
                                 
                                 row = process_tweet(tweet)
                                 if len(row) == len(header):
-                                    fout.write("\t".join(row) + "\n")
+                                    fout.write(
+                                        "\t".join(row).replace(
+                                            '\n', ' '
+                                        ).replace(
+                                            '\n', ' '
+                                        ) + "\n"
+                                    )
                                     # print("Found a tweet in..." + str(logfile))
                                     # print("\t\t\t" + tweet.get('id_str'))
                                     tweet_id_set.add(tweet.get('id_str'))
