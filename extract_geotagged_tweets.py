@@ -96,7 +96,7 @@ if __name__ == "__main__":
 
         for logfile in current_date_path_in.iterdir():
             if logfile.is_file():
-                with open(logfile, encoding='ISO-8859-1') as fin:
+                with open(logfile) as fin:
                     try:
                         for line in fin:
                             try:
@@ -124,7 +124,7 @@ if __name__ == "__main__":
                                     # print("\t\t\t" + tweet.get('id_str'))
                                     tweet_id_set.add(tweet.get('id_str'))
                     except UnicodeDecodeError:
-                        print("Malformat file")
+                        print("Malformat file...\t" + str(logfile))
                         # time.sleep(10)
         fout.close()
         print("Finished...\t" + str(fout_path))
